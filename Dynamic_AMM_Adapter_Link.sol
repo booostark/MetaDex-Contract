@@ -10,16 +10,18 @@ interface IWETH {
 contract Dynamic_AMM_Adapter_Link is Ownable
 {
     mapping(string => address) public m_Adaptor_Address;
+    mapping(string => address) public m_AMM_Address;
     address public m_WETH;
     
-    function Set_Adaptor(string memory name ,address adaptor_addr) public  onlyOwner
+    function Set_Adaptor(string memory name ,address adaptor_addr,address amm_addr) public  onlyOwner
     {
         m_Adaptor_Address[name]=adaptor_addr;
+        m_AMM_Address[name]=amm_addr;
     }
     
-    function Get_Adaptor(string memory name) public  view returns(address)
+    function Get_Adaptor(string memory name) public  view returns(address,address )
     {
-        return  m_Adaptor_Address[name];
+        return ( m_Adaptor_Address[name],m_AMM_Address[name]);
     }
     function Get_WETH()public  view returns(address)
     {

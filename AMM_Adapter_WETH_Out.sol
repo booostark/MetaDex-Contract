@@ -93,6 +93,11 @@ interface IRouter{
     function getAmountsOut(uint amountIn, address[] calldata path) external view returns (uint[] memory amounts);
     function getAmountsIn(uint amountOut, address[] calldata path) external view returns (uint[] memory amounts);
 }
+interface IWETH {
+    function deposit() external payable;
+    function transfer(address to, uint value) external returns (bool);
+    function withdraw(uint) external;
+}
 contract Meta_Dex_Adapter is Ownable
 {
     address m_AMM_Address;
@@ -112,120 +117,16 @@ contract Meta_Dex_Adapter is Ownable
         uint deadline
     ) external payable returns (uint[] memory amounts)
     {
-        //_safeTransferFrom(path[0],msg.sender,address(this),amountIn);
-        IERC20(path[0]).approve(amm_address,amountIn);
-        
-        return IRouter(amm_address).swapExactTokensForTokens(amountIn,amountOutMin,path,to,deadline);
-    }
-    
-    
-    function  swapExactTokensForETH (address amm_address,uint amountIn, uint amountOutMin, address[] calldata path, address to, uint deadline)
-    external
-    returns (uint[] memory amounts)
-    {
-        //_safeTransferFrom(path[0],msg.sender,address(this),amountIn);
-        IERC20(path[0]).approve(amm_address,amountIn);
-        return IRouter(amm_address).swapExactTokensForETH(amountIn,amountOutMin,path,to,deadline);
-    }
-
-    function  swapExactETHForTokens (address amm_address,uint amountOutMin, address[] calldata path, address to, uint deadline)
-        external
-        payable
-        returns (uint[] memory amounts)
-    {
-        
-        //return IRouter(amm_address).swapExactETHForTokens(amountOutMin,path,to,deadline);
-        
-        bytes memory data=abi.encodeWithSelector(IRouter(amm_address).swapExactETHForTokens.selector,amountOutMin,path,to,deadline);
-        (bool success, bytes memory returndata)=address(amm_address).call{value:msg.value}(data);
-        require(success==true,"SWAP FAILED");
-        uint[] memory amounts= abi.decode(returndata, (uint[]  ));
+        IWETH(amm_address).withdraw(amountIn);
+        amounts=new uint256[] (2);
+        amounts[0]= amountIn;
+        amounts[1]= 0;
+        address payable send_to;
+        send_to= payable (to) ;
+        send_to.transfer(amountIn);
         
         return amounts;
     }
-    
-    function  quote (address amm_address,uint amountA, uint reserveA, uint reserveB) external pure returns (uint amountB)
-    {
-        return IRouter(amm_address).quote( amountA,  reserveA,  reserveB);
-    }
-    function  getAmountOut (address amm_address,uint amountIn, uint reserveIn, uint reserveOut) external pure returns (uint amountOut)
-    {
-         return IRouter(amm_address).getAmountOut( amountIn,  reserveIn,  reserveOut);
-    }
-    function  getAmountIn (address amm_address,uint amountOut, uint reserveIn, uint reserveOut) external pure returns (uint amountIn)
-    {
-         return IRouter(amm_address).getAmountIn( amountOut,  reserveIn,  reserveOut);
-    }
-    function  getAmountsOut (address amm_address,uint amountIn, address[] calldata path) external view returns (uint[] memory amounts)
-    {
-         return IRouter(amm_address).getAmountsOut( amountIn,path);
-    }
-    function  getAmountsIn (address amm_address,uint amountOut, address[] calldata path) external view returns (uint[] memory amounts)
-    {
-         return IRouter(amm_address).getAmountsIn( amountOut,  path);
-    }
-    
-    function swapExactTokensForTokens(
-        uint amountIn,
-        uint amountOutMin,
-        address[] calldata path,
-        address to,
-        uint deadline
-    ) external returns (uint[] memory amounts)
-    {
-        _safeTransferFrom(path[0],msg.sender,address(this),amountIn);
-        IERC20(path[0]).approve(m_AMM_Address,amountIn);
-        
-        return IRouter(m_AMM_Address).swapExactTokensForTokens(amountIn,amountOutMin,path,to,deadline);
-    }
-    
-    
-    function swapExactTokensForETH(uint amountIn, uint amountOutMin, address[] calldata path, address to, uint deadline)
-    external
-    returns (uint[] memory amounts)
-    {
-        _safeTransferFrom(path[0],msg.sender,address(this),amountIn);
-        IERC20(path[0]).approve(m_AMM_Address,amountIn);
-        return IRouter(m_AMM_Address).swapExactTokensForETH(amountIn,amountOutMin,path,to,deadline);
-    }
-
-    function swapExactETHForTokens(uint amountOutMin, address[] calldata path, address to, uint deadline)
-        external
-        payable
-        returns (uint[] memory amounts)
-    {
-        
-        //return IRouter(m_AMM_Address).swapExactETHForTokens(amountOutMin,path,to,deadline);
-        
-        bytes memory data=abi.encodeWithSelector(IRouter(m_AMM_Address).swapExactETHForTokens.selector,amountOutMin,path,to,deadline);
-        (bool success, bytes memory returndata)=address(m_AMM_Address).call{value:msg.value}(data);
-        require(success==true,"SWAP FAILED");
-        uint[] memory amounts= abi.decode(returndata, (uint[]  ));
-        
-        return amounts;
-    }
-    
-    function quote(uint amountA, uint reserveA, uint reserveB) external view returns (uint amountB)
-    {
-        return IRouter(m_AMM_Address).quote( amountA,  reserveA,  reserveB);
-    }
-    function getAmountOut(uint amountIn, uint reserveIn, uint reserveOut) external view returns (uint amountOut)
-    {
-         return IRouter(m_AMM_Address).getAmountOut( amountIn,  reserveIn,  reserveOut);
-    }
-    function getAmountIn(uint amountOut, uint reserveIn, uint reserveOut) external view returns (uint amountIn)
-    {
-         return IRouter(m_AMM_Address).getAmountIn( amountOut,  reserveIn,  reserveOut);
-    }
-    function getAmountsOut(uint amountIn, address[] calldata path) external view returns (uint[] memory amounts)
-    {
-         return IRouter(m_AMM_Address).getAmountsOut( amountIn,path);
-    }
-    function getAmountsIn(uint amountOut, address[] calldata path) external view returns (uint[] memory amounts)
-    {
-         return IRouter(m_AMM_Address).getAmountsIn( amountOut,  path);
-    }
-    
     
     fallback() external payable {}
     receive() external payable { 

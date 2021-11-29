@@ -25,10 +25,6 @@
 				"type": "event"
 			},
 			{
-				"stateMutability": "payable",
-				"type": "fallback"
-			},
-			{
 				"inputs": [
 					{
 						"internalType": "address",
@@ -54,20 +50,163 @@
 			{
 				"inputs": [
 					{
-						"internalType": "address",
-						"name": "addr",
-						"type": "address"
+						"components": [
+							{
+								"components": [
+									{
+										"internalType": "address",
+										"name": "token",
+										"type": "address"
+									},
+									{
+										"internalType": "uint256",
+										"name": "amount",
+										"type": "uint256"
+									}
+								],
+								"internalType": "struct Temp_Token_Table_Element[]",
+								"name": "temp_token_table_register",
+								"type": "tuple[]"
+							},
+							{
+								"internalType": "bool",
+								"name": "from_eth",
+								"type": "bool"
+							},
+							{
+								"internalType": "bool",
+								"name": "to_eth",
+								"type": "bool"
+							},
+							{
+								"components": [
+									{
+										"internalType": "string",
+										"name": "amm_name",
+										"type": "string"
+									},
+									{
+										"internalType": "uint256",
+										"name": "token_index_from",
+										"type": "uint256"
+									},
+									{
+										"internalType": "address[]",
+										"name": "path",
+										"type": "address[]"
+									},
+									{
+										"internalType": "uint256",
+										"name": "token_index_to",
+										"type": "uint256"
+									},
+									{
+										"internalType": "address",
+										"name": "receiver",
+										"type": "address"
+									},
+									{
+										"internalType": "uint256",
+										"name": "numerator",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "denominator",
+										"type": "uint256"
+									}
+								],
+								"internalType": "struct Process_Instruction[]",
+								"name": "instructions",
+								"type": "tuple[]"
+							}
+						],
+						"internalType": "struct Reunite_Process",
+						"name": "args",
+						"type": "tuple"
 					}
 				],
-				"name": "Get_AMM_Address",
+				"name": "Process",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"components": [
+							{
+								"internalType": "address",
+								"name": "token",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "amount",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct Temp_Token_Table_Element[]",
+						"name": "token_registers",
+						"type": "tuple[]"
+					},
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "amm_name",
+								"type": "string"
+							},
+							{
+								"internalType": "uint256",
+								"name": "token_index_from",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address[]",
+								"name": "path",
+								"type": "address[]"
+							},
+							{
+								"internalType": "uint256",
+								"name": "token_index_to",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "receiver",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "numerator",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "denominator",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct Process_Instruction",
+						"name": "args",
+						"type": "tuple"
+					}
+				],
+				"name": "Process_One_Instruction",
 				"outputs": [
 					{
-						"internalType": "address",
+						"internalType": "uint256",
 						"name": "",
-						"type": "address"
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
 					}
 				],
-				"stateMutability": "view",
+				"stateMutability": "payable",
 				"type": "function"
 			},
 			{
@@ -78,9 +217,22 @@
 						"type": "address"
 					}
 				],
-				"name": "Set_AMM_Address",
+				"name": "Set_Dynamic_AMM_Adapter_Link",
 				"outputs": [],
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "m_Dynamic_AMM_Adapter_Link",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -158,50 +310,6 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "amm_address",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "amountIn",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "amountOutMin",
-						"type": "uint256"
-					},
-					{
-						"internalType": "address[]",
-						"name": "path",
-						"type": "address[]"
-					},
-					{
-						"internalType": "address",
-						"name": "to",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "deadline",
-						"type": "uint256"
-					}
-				],
-				"name": "swapExactTokensForTokens",
-				"outputs": [
-					{
-						"internalType": "uint256[]",
-						"name": "amounts",
-						"type": "uint256[]"
-					}
-				],
-				"stateMutability": "payable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
 						"name": "newOwner",
 						"type": "address"
 					}
@@ -210,10 +318,6 @@
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
-			},
-			{
-				"stateMutability": "payable",
-				"type": "receive"
 			}
 		],
 		"devdoc": {
@@ -239,7 +343,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"AMM_Adapter_Check.sol": "Meta_Dex_Adapter"
+			"Reunite_AMM.sol": "Reunite_AMM"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -253,11 +357,18 @@
 		"remappings": []
 	},
 	"sources": {
-		"AMM_Adapter_Check.sol": {
-			"keccak256": "0xd7924f38b9eab819d115f33a111a7b5a43b33377a1b3d36617b3ffe53499149b",
+		"I_AMM_Adaptor.sol": {
+			"keccak256": "0x5d842a481f7a189e0b6c35428966acaac5eb2d422322b3d269b54f1d8816ad6a",
 			"urls": [
-				"bzz-raw://1311dd0760a058ffe7f18d4bbc0cfd2727d215a1ca52614afd98f483d9bc59f4",
-				"dweb:/ipfs/QmXgRY15RSBAfDSd36NNRbSNr3w2TkpRZYZhKcNdG3Rq66"
+				"bzz-raw://77a081e0fbbf1aa1ad9e9eab75feaa6442e3474688dfb11330823b20d53c144c",
+				"dweb:/ipfs/QmeKxfq6HEQEbSQfYGDNXmVHrJzUchhJbq4iXqskytYdZ8"
+			]
+		},
+		"Reunite_AMM.sol": {
+			"keccak256": "0x5d8bc169af47d4bb21b890554bcc34d2e13621b8eba011734afe7663f8935be2",
+			"urls": [
+				"bzz-raw://171eefb44412b3109acf5ab2f0459b4560ff34fe50ca40d06e64d5cadec0f761",
+				"dweb:/ipfs/QmQcoGujMtwxNe4B1enxyvRLQYyMxES3Wr2Qms4SN8j9K1"
 			]
 		},
 		"openzeppelin/contracts/access/Ownable.sol": {
@@ -282,6 +393,14 @@
 			"urls": [
 				"bzz-raw://4fd625dca17657403af518cc6c8ab5c54c58898cf6e912ca2e1b0f3194ad0405",
 				"dweb:/ipfs/QmQVv7YeeKmaS11bg7YDTeeGDk6i7sV8LMMfohaLM4SiRu"
+			]
+		},
+		"openzeppelin/contracts/utils/math/SafeMath.sol": {
+			"keccak256": "0x29c462775f5b4c76dce400f120f3530aa3f81da42c839f975dc2b64784d22434",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://063db5d664d3d5bae10d0056c9d00339265229532d06b53d5f2e91778b2e428d",
+				"dweb:/ipfs/QmWM92rU59t6BcZSj4w6ikoPL32R9hyTMb9Msg5X8vvu1s"
 			]
 		}
 	},

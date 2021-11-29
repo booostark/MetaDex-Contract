@@ -768,7 +768,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"AMM_Adapter_Uni_like.sol": "IRouter"
+			"AMM_Adapter_Check.sol": "IRouter"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -776,17 +776,17 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
-			"runs": 200
+			"enabled": true,
+			"runs": 400
 		},
 		"remappings": []
 	},
 	"sources": {
-		"AMM_Adapter_Uni_like.sol": {
-			"keccak256": "0x890c017c58dcf76363ddaafbf10565807458fe30def9a7900b9d13f956875b74",
+		"AMM_Adapter_Check.sol": {
+			"keccak256": "0xd7924f38b9eab819d115f33a111a7b5a43b33377a1b3d36617b3ffe53499149b",
 			"urls": [
-				"bzz-raw://b93ede4cc8fa3860d147ade64698d964a00b8ebd34c2b0bc393ab014b8c1a33c",
-				"dweb:/ipfs/QmX3oagAJBY7yPFhSQyB2Wv5f1hdBrmMYc6YJg41GewDB6"
+				"bzz-raw://1311dd0760a058ffe7f18d4bbc0cfd2727d215a1ca52614afd98f483d9bc59f4",
+				"dweb:/ipfs/QmXgRY15RSBAfDSd36NNRbSNr3w2TkpRZYZhKcNdG3Rq66"
 			]
 		},
 		"openzeppelin/contracts/access/Ownable.sol": {

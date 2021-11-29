@@ -38,6 +38,11 @@
 						"internalType": "address",
 						"name": "",
 						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
 					}
 				],
 				"stateMutability": "view",
@@ -67,6 +72,11 @@
 						"internalType": "address",
 						"name": "adaptor_addr",
 						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "amm_addr",
+						"type": "address"
 					}
 				],
 				"name": "Set_Adaptor",
@@ -85,6 +95,25 @@
 				"name": "Set_WETH",
 				"outputs": [],
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"name": "m_AMM_Address",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -184,17 +213,17 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
-			"runs": 200
+			"enabled": true,
+			"runs": 400
 		},
 		"remappings": []
 	},
 	"sources": {
 		"Dynamic_AMM_Adapter_Link.sol": {
-			"keccak256": "0x211a804c4f844b0691ff92ebaa7da1eda655f96b140d94a9ef4add2816b72adb",
+			"keccak256": "0xc9d9068ccb634e307892a0f9e144607bb688347e4f1144747f0c13b31a42f66a",
 			"urls": [
-				"bzz-raw://7a920cb0d101ad2041699e8b1ba2e2a5b9e08b2fb38440f58df23f8d73a3df1f",
-				"dweb:/ipfs/QmTht7xortpw4vPmTqZ2ma34Nk2r73ZSfEMLWPWtwsAjDK"
+				"bzz-raw://287dbacedafb4e76385be42999a6f31e1b86095dddd25e18166b45bff5e1385b",
+				"dweb:/ipfs/QmS5wchDCENqvHPLhg1Vmx4rXbSdCSXfR21BY6bBRy5SJH"
 			]
 		},
 		"openzeppelin/contracts/access/Ownable.sol": {

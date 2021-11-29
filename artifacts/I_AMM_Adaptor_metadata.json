@@ -308,7 +308,7 @@
 						"type": "uint256[]"
 					}
 				],
-				"stateMutability": "nonpayable",
+				"stateMutability": "payable",
 				"type": "function"
 			}
 		],
@@ -333,17 +333,17 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
-			"runs": 200
+			"enabled": true,
+			"runs": 400
 		},
 		"remappings": []
 	},
 	"sources": {
 		"I_AMM_Adaptor.sol": {
-			"keccak256": "0x7bd3cfc1a6993b5cc5318b13e5813925d1cca4530f13a7f18bc24422c1ec7232",
+			"keccak256": "0x5d842a481f7a189e0b6c35428966acaac5eb2d422322b3d269b54f1d8816ad6a",
 			"urls": [
-				"bzz-raw://834300837bb16ac731388167332e8b9adfe56839aae0b7e8d6ae7fa441dd740e",
-				"dweb:/ipfs/QmZZEbSnHvQ3MEKeqk68ru8BoQoakQrqEcw5ouA6kXVDkq"
+				"bzz-raw://77a081e0fbbf1aa1ad9e9eab75feaa6442e3474688dfb11330823b20d53c144c",
+				"dweb:/ipfs/QmeKxfq6HEQEbSQfYGDNXmVHrJzUchhJbq4iXqskytYdZ8"
 			]
 		}
 	},
