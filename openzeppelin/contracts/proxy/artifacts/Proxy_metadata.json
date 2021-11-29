@@ -1,0 +1,55 @@
+{
+	"compiler": {
+		"version": "0.8.9+commit.e5eed63a"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"stateMutability": "payable",
+				"type": "fallback"
+			},
+			{
+				"stateMutability": "payable",
+				"type": "receive"
+			}
+		],
+		"devdoc": {
+			"details": "This abstract contract provides a fallback function that delegates all calls to another contract using the EVM instruction `delegatecall`. We refer to the second contract as the _implementation_ behind the proxy, and it has to be specified by overriding the virtual {_implementation} function. Additionally, delegation to the implementation can be triggered manually through the {_fallback} function, or to a different contract through the {_delegate} function. The success and return data of the delegated call will be returned back to the caller of the proxy.",
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"openzeppelin/contracts/proxy/Proxy.sol": "Proxy"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"openzeppelin/contracts/proxy/Proxy.sol": {
+			"keccak256": "0xdfddefa47c1f11dde2c3b5533c76ccef27a526985c74d9c917deb699d5d46a56",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://fd15423cc0456b783054f974bc88f25b88c99319a2cfec4b5745acfedbbd1d88",
+				"dweb:/ipfs/QmZVXupWzRDTXynYd2GLtB9CTGF9ehrqzcPhqXNVZPDCTc"
+			]
+		}
+	},
+	"version": 1
+}
