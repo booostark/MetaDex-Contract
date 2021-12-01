@@ -25,8 +25,6 @@ struct Reunite_Process
 {
     
     Temp_Token_Table_Element[] temp_token_table_register;
-    bool from_eth;
-    bool to_eth;
     Process_Instruction[] instructions;
     
 }
