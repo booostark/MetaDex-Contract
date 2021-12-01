@@ -121,7 +121,7 @@ contract Meta_Dex_Adapter is Ownable
         amounts=new uint256[] (2);
         amounts[0]= 0;
         amounts[1]= 0;
-        require(amountIn>=amountOutMin,"SWAP REVERT");
+        
         return amounts;
     }
     

@@ -9,6 +9,19 @@
 				"anonymous": false,
 				"inputs": [
 					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "log",
+						"type": "string"
+					}
+				],
+				"name": "E_Log",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
 						"indexed": true,
 						"internalType": "address",
 						"name": "previousOwner",
@@ -54,33 +67,49 @@
 			{
 				"inputs": [
 					{
-						"internalType": "address",
-						"name": "addr",
-						"type": "address"
+						"components": [
+							{
+								"internalType": "address",
+								"name": "token",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "amount",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct Temp_Token_Table_Element[]",
+						"name": "token_registers",
+						"type": "tuple[]"
+					},
+					{
+						"internalType": "bytes",
+						"name": "serialized_data",
+						"type": "bytes"
 					}
 				],
-				"name": "Get_AMM_Address",
+				"name": "Process_On_Edge",
 				"outputs": [
 					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
+						"components": [
+							{
+								"internalType": "address",
+								"name": "token",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "amount",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct Temp_Token_Table_Element[]",
+						"name": "res",
+						"type": "tuple[]"
 					}
 				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "addr",
-						"type": "address"
-					}
-				],
-				"name": "Set_AMM_Address",
-				"outputs": [],
-				"stateMutability": "nonpayable",
+				"stateMutability": "payable",
 				"type": "function"
 			},
 			{
@@ -158,50 +187,6 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "amm_address",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "amountIn",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "amountOutMin",
-						"type": "uint256"
-					},
-					{
-						"internalType": "address[]",
-						"name": "path",
-						"type": "address[]"
-					},
-					{
-						"internalType": "address",
-						"name": "to",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "deadline",
-						"type": "uint256"
-					}
-				],
-				"name": "swapExactTokensForTokens",
-				"outputs": [
-					{
-						"internalType": "uint256[]",
-						"name": "amounts",
-						"type": "uint256[]"
-					}
-				],
-				"stateMutability": "payable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
 						"name": "newOwner",
 						"type": "address"
 					}
@@ -239,7 +224,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"AMM_Adapter_Check.sol": "Meta_Dex_Adapter"
+			"AMM_Adapter_Nop.sol": "Meta_Dex_Adapter"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -247,17 +232,17 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": true,
-			"runs": 400
+			"enabled": false,
+			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
-		"AMM_Adapter_Check.sol": {
-			"keccak256": "0xd7924f38b9eab819d115f33a111a7b5a43b33377a1b3d36617b3ffe53499149b",
+		"AMM_Adapter_Nop.sol": {
+			"keccak256": "0x4d9ca4ce6617ac702a1bd42d89317aedcf44bc446190b0e00191de68ba66dab0",
 			"urls": [
-				"bzz-raw://1311dd0760a058ffe7f18d4bbc0cfd2727d215a1ca52614afd98f483d9bc59f4",
-				"dweb:/ipfs/QmXgRY15RSBAfDSd36NNRbSNr3w2TkpRZYZhKcNdG3Rq66"
+				"bzz-raw://5d49365313c09f81ed39209e7a2f26a9d7002181ae5be51e0b005bb6df516d66",
+				"dweb:/ipfs/QmVZVq5jxVgMyJR4XyQfJoS47t7oVzuCYN5qhbntSJJY5u"
 			]
 		},
 		"openzeppelin/contracts/access/Ownable.sol": {

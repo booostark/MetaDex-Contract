@@ -2,34 +2,23 @@
 import "./openzeppelin/contracts/access/Ownable.sol";
 import "./openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "./openzeppelin/contracts/utils/math/SafeMath.sol";
-
+import "./I_AMM_Adaptor.sol";
 struct Temp_Token_Table_Element
 {
     address token;
     uint256 amount;
     
-}  
-
-interface I_AMM_Adaptor
-{
-    
-
-function Get_AMM_Address(address addr)external view returns  (address);
-
-function  Process_On_Edge (Temp_Token_Table_Element[]memory token_registers ,bytes calldata serialized_data
-   
-) external payable returns (uint[] memory amounts);
-
-
-function  getAmountsOut (address amm_address,uint amountIn, address[] calldata path) external view returns (uint[] memory amounts);
-
-function  getAmountsIn (address amm_address,uint amountOut, address[] calldata path) external view returns (uint[] memory amounts);
-
 }
 struct Process_Instruction
 {
     string amm_name;
-    bytes serialized_data;
+    uint256 token_index_from;
+    address [] path;
+    uint256 token_index_to;
+    address receiver;
+    
+    uint256 numerator;
+    uint256 denominator;
     
 }
 struct Reunite_Process
@@ -53,36 +42,63 @@ contract Reunite_AMM  is Ownable
         m_Dynamic_AMM_Adapter_Link=addr;
     }
     
-    function Process(Reunite_Process calldata  args)public payable returns(Temp_Token_Table_Element[] memory res)
+    function Process(Reunite_Process calldata  args)public payable
     {
         Temp_Token_Table_Element[] memory token_registers=new Temp_Token_Table_Element[](args.temp_token_table_register.length);
-       
-      
+        uint256 token_received=0;
+        for(uint i=0;i<args.temp_token_table_register.length;i++)
+        {
+            if(args.temp_token_table_register[i].amount>0 && args.temp_token_table_register[i].token!=address(0))
+            {
+                token_received= Receive_Token(args.temp_token_table_register[i].token,args.temp_token_table_register[i].amount,msg.sender);
+                token_registers[i].amount=token_received;
+            }
+            token_registers[i].token=args.temp_token_table_register[i].token;
+        }
+        uint256 t_amountIn;uint256 received_ammount_from_amm;
         for(uint i=0;i<args.instructions.length;i++)
         {
-         token_registers= Process_One_Instruction(token_registers,args.instructions[i]);
-       
+            ( t_amountIn, received_ammount_from_amm)=Process_One_Instruction(token_registers,args.instructions[i]);
+            token_registers[args.instructions[i].token_index_from].amount=token_registers[args.instructions[i].token_index_from].amount.sub(t_amountIn);
+            token_registers[args.instructions[i].token_index_to].amount=token_registers[args.instructions[i].token_index_to].amount.add(received_ammount_from_amm);
+            
+            
+            //I_AMM_Adaptor(t_adaptor).
             
         }
-        return token_registers;
         
         
     }
     
-    function Process_One_Instruction(Temp_Token_Table_Element[]memory token_registers , Process_Instruction memory args )public payable returns (Temp_Token_Table_Element[]memory )
+    function Process_One_Instruction(Temp_Token_Table_Element[]memory token_registers , Process_Instruction memory args )public payable returns (uint256 ,uint256)
     {
+        uint t_amountIn;
+        uint t_amountOutMin=0;
+
+        
+        address t_to;
+        uint t_deadline;
+        
         
         address t_adaptor;
         address t_amm;
         
-        
+        uint256 t_token_index_from;
+        uint256 t_token_index_to;
         (t_adaptor,t_amm)=I_Dynamic_AMM_Adapter_Link(m_Dynamic_AMM_Adapter_Link).Get_Adaptor(args.amm_name);
-        bytes memory data=abi.encodeWithSelector(I_AMM_Adaptor(t_adaptor).Process_On_Edge.selector,token_registers ,args.serialized_data);
-        (bool success, bytes memory returndata) = address(t_adaptor).delegatecall(data);
-        require(success==true,"SafeERC20: ERC20 operation did not succeed");
-        Temp_Token_Table_Element[]memory res =abi.decode(returndata, (Temp_Token_Table_Element[]));
+        t_token_index_from=args.token_index_from;
+        t_token_index_to=args.token_index_to;
+        t_amountIn=token_registers[t_token_index_from].amount;
+        t_amountIn=t_amountIn.mul(args.numerator);
+        t_amountIn=t_amountIn.div(args.denominator);
         
-        return res;
+
+        t_deadline=block.timestamp+30;
+        t_to=args.receiver;
+        bytes memory data=abi.encodeWithSelector(I_AMM_Adaptor(t_adaptor).swapExactTokensForTokens.selector, t_amm,t_amountIn, t_amountOutMin,args.path,t_to,t_deadline);
+        (bool success, bytes memory returndata)=address(t_adaptor).delegatecall(data);
+        uint[]memory received_ammount_from_amm= abi.decode(returndata, (uint[]));
+        return (t_amountIn,received_ammount_from_amm[received_ammount_from_amm.length-1]);
     }
     
     

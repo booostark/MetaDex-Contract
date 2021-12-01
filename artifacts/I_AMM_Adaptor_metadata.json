@@ -27,69 +27,37 @@
 			{
 				"inputs": [
 					{
-						"internalType": "address",
-						"name": "amm_address",
-						"type": "address"
+						"components": [
+							{
+								"internalType": "address",
+								"name": "token",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "amount",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct Temp_Token_Table_Element[]",
+						"name": "token_registers",
+						"type": "tuple[]"
 					},
 					{
-						"internalType": "uint256",
-						"name": "amountOut",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "reserveIn",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "reserveOut",
-						"type": "uint256"
+						"internalType": "bytes",
+						"name": "serialized_data",
+						"type": "bytes"
 					}
 				],
-				"name": "getAmountIn",
+				"name": "Process_On_Edge",
 				"outputs": [
 					{
-						"internalType": "uint256",
-						"name": "amountIn",
-						"type": "uint256"
+						"internalType": "uint256[]",
+						"name": "amounts",
+						"type": "uint256[]"
 					}
 				],
-				"stateMutability": "pure",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "amm_address",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "amountIn",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "reserveIn",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "reserveOut",
-						"type": "uint256"
-					}
-				],
-				"name": "getAmountOut",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "amountOut",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "pure",
+				"stateMutability": "payable",
 				"type": "function"
 			},
 			{
@@ -149,167 +117,6 @@
 				],
 				"stateMutability": "view",
 				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "amm_address",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "amountA",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "reserveA",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "reserveB",
-						"type": "uint256"
-					}
-				],
-				"name": "quote",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "amountB",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "pure",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "amm_address",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "amountOutMin",
-						"type": "uint256"
-					},
-					{
-						"internalType": "address[]",
-						"name": "path",
-						"type": "address[]"
-					},
-					{
-						"internalType": "address",
-						"name": "to",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "deadline",
-						"type": "uint256"
-					}
-				],
-				"name": "swapExactETHForTokens",
-				"outputs": [
-					{
-						"internalType": "uint256[]",
-						"name": "amounts",
-						"type": "uint256[]"
-					}
-				],
-				"stateMutability": "payable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "amm_address",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "amountIn",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "amountOutMin",
-						"type": "uint256"
-					},
-					{
-						"internalType": "address[]",
-						"name": "path",
-						"type": "address[]"
-					},
-					{
-						"internalType": "address",
-						"name": "to",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "deadline",
-						"type": "uint256"
-					}
-				],
-				"name": "swapExactTokensForETH",
-				"outputs": [
-					{
-						"internalType": "uint256[]",
-						"name": "amounts",
-						"type": "uint256[]"
-					}
-				],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "amm_address",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "amountIn",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "amountOutMin",
-						"type": "uint256"
-					},
-					{
-						"internalType": "address[]",
-						"name": "path",
-						"type": "address[]"
-					},
-					{
-						"internalType": "address",
-						"name": "to",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "deadline",
-						"type": "uint256"
-					}
-				],
-				"name": "swapExactTokensForTokens",
-				"outputs": [
-					{
-						"internalType": "uint256[]",
-						"name": "amounts",
-						"type": "uint256[]"
-					}
-				],
-				"stateMutability": "payable",
-				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -325,7 +132,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"I_AMM_Adaptor.sol": "I_AMM_Adaptor"
+			"Reunite_AMM.sol": "I_AMM_Adaptor"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -333,17 +140,49 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": true,
-			"runs": 400
+			"enabled": false,
+			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
-		"I_AMM_Adaptor.sol": {
-			"keccak256": "0x5d842a481f7a189e0b6c35428966acaac5eb2d422322b3d269b54f1d8816ad6a",
+		"Reunite_AMM.sol": {
+			"keccak256": "0xd33b4321c594558e9e1a26c117da1f25f757ce896159b7d4bcc2a737fd1d1cbb",
 			"urls": [
-				"bzz-raw://77a081e0fbbf1aa1ad9e9eab75feaa6442e3474688dfb11330823b20d53c144c",
-				"dweb:/ipfs/QmeKxfq6HEQEbSQfYGDNXmVHrJzUchhJbq4iXqskytYdZ8"
+				"bzz-raw://42d9a0ffc4368d609d0202a477cb8d849e2eef01767fd6cbbab53a9c22c5f23a",
+				"dweb:/ipfs/QmRuJAVqkpp8sx3BiQWbEHcEz3M1j5kmMbCKQSaXVwZKeM"
+			]
+		},
+		"openzeppelin/contracts/access/Ownable.sol": {
+			"keccak256": "0xa1b27b3f44ff825974e5268e8f63ad3b03add5b464880d860fbb8cae043e17f7",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://ad0fb4425453220f15bdb8c4e009052839804bb725797b6d8c02ee2271bc3c23",
+				"dweb:/ipfs/QmPtjdMxzEifPUEUa6cKX1yfTWjaZV6QtdwMdN6bEL9FBM"
+			]
+		},
+		"openzeppelin/contracts/token/ERC20/IERC20.sol": {
+			"keccak256": "0xc1452b054778f1926419196ef12ae200758a4ee728df69ae1cd13e5c16ca7df7",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://4cb252ec7657ba7a91be688cbd263090aa5379e504f488a62d06198e0d630322",
+				"dweb:/ipfs/QmW56fDiDirhWfWiKrycXE5UY6tTNtFrYx39ipnSs8mkYb"
+			]
+		},
+		"openzeppelin/contracts/utils/Context.sol": {
+			"keccak256": "0x7736c187e6f1358c1ea9350a2a21aa8528dec1c2f43b374a9067465a3a51f5d3",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://4fd625dca17657403af518cc6c8ab5c54c58898cf6e912ca2e1b0f3194ad0405",
+				"dweb:/ipfs/QmQVv7YeeKmaS11bg7YDTeeGDk6i7sV8LMMfohaLM4SiRu"
+			]
+		},
+		"openzeppelin/contracts/utils/math/SafeMath.sol": {
+			"keccak256": "0x29c462775f5b4c76dce400f120f3530aa3f81da42c839f975dc2b64784d22434",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://063db5d664d3d5bae10d0056c9d00339265229532d06b53d5f2e91778b2e428d",
+				"dweb:/ipfs/QmWM92rU59t6BcZSj4w6ikoPL32R9hyTMb9Msg5X8vvu1s"
 			]
 		}
 	},

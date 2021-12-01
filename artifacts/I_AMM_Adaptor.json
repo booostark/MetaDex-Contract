@@ -50,14 +50,9 @@
 		"gasEstimates": null,
 		"methodIdentifiers": {
 			"Get_AMM_Address(address)": "8ba1f6c9",
-			"getAmountIn(address,uint256,uint256,uint256)": "76a41c5c",
-			"getAmountOut(address,uint256,uint256,uint256)": "4327e8b5",
+			"Process_On_Edge((address,uint256)[],bytes)": "5530ea1a",
 			"getAmountsIn(address,uint256,address[])": "192128b2",
-			"getAmountsOut(address,uint256,address[])": "bb7b9c76",
-			"quote(address,uint256,uint256,uint256)": "5b56c671",
-			"swapExactETHForTokens(address,uint256,address[],address,uint256)": "fde1adda",
-			"swapExactTokensForETH(address,uint256,uint256,address[],address,uint256)": "9c91fcb5",
-			"swapExactTokensForTokens(address,uint256,uint256,address[],address,uint256)": "375734d9"
+			"getAmountsOut(address,uint256,address[])": "bb7b9c76"
 		}
 	},
 	"abi": [
@@ -83,69 +78,37 @@
 		{
 			"inputs": [
 				{
-					"internalType": "address",
-					"name": "amm_address",
-					"type": "address"
+					"components": [
+						{
+							"internalType": "address",
+							"name": "token",
+							"type": "address"
+						},
+						{
+							"internalType": "uint256",
+							"name": "amount",
+							"type": "uint256"
+						}
+					],
+					"internalType": "struct Temp_Token_Table_Element[]",
+					"name": "token_registers",
+					"type": "tuple[]"
 				},
 				{
-					"internalType": "uint256",
-					"name": "amountOut",
-					"type": "uint256"
-				},
-				{
-					"internalType": "uint256",
-					"name": "reserveIn",
-					"type": "uint256"
-				},
-				{
-					"internalType": "uint256",
-					"name": "reserveOut",
-					"type": "uint256"
+					"internalType": "bytes",
+					"name": "serialized_data",
+					"type": "bytes"
 				}
 			],
-			"name": "getAmountIn",
+			"name": "Process_On_Edge",
 			"outputs": [
 				{
-					"internalType": "uint256",
-					"name": "amountIn",
-					"type": "uint256"
+					"internalType": "uint256[]",
+					"name": "amounts",
+					"type": "uint256[]"
 				}
 			],
-			"stateMutability": "pure",
-			"type": "function"
-		},
-		{
-			"inputs": [
-				{
-					"internalType": "address",
-					"name": "amm_address",
-					"type": "address"
-				},
-				{
-					"internalType": "uint256",
-					"name": "amountIn",
-					"type": "uint256"
-				},
-				{
-					"internalType": "uint256",
-					"name": "reserveIn",
-					"type": "uint256"
-				},
-				{
-					"internalType": "uint256",
-					"name": "reserveOut",
-					"type": "uint256"
-				}
-			],
-			"name": "getAmountOut",
-			"outputs": [
-				{
-					"internalType": "uint256",
-					"name": "amountOut",
-					"type": "uint256"
-				}
-			],
-			"stateMutability": "pure",
+			"stateMutability": "payable",
 			"type": "function"
 		},
 		{
@@ -204,167 +167,6 @@
 				}
 			],
 			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"inputs": [
-				{
-					"internalType": "address",
-					"name": "amm_address",
-					"type": "address"
-				},
-				{
-					"internalType": "uint256",
-					"name": "amountA",
-					"type": "uint256"
-				},
-				{
-					"internalType": "uint256",
-					"name": "reserveA",
-					"type": "uint256"
-				},
-				{
-					"internalType": "uint256",
-					"name": "reserveB",
-					"type": "uint256"
-				}
-			],
-			"name": "quote",
-			"outputs": [
-				{
-					"internalType": "uint256",
-					"name": "amountB",
-					"type": "uint256"
-				}
-			],
-			"stateMutability": "pure",
-			"type": "function"
-		},
-		{
-			"inputs": [
-				{
-					"internalType": "address",
-					"name": "amm_address",
-					"type": "address"
-				},
-				{
-					"internalType": "uint256",
-					"name": "amountOutMin",
-					"type": "uint256"
-				},
-				{
-					"internalType": "address[]",
-					"name": "path",
-					"type": "address[]"
-				},
-				{
-					"internalType": "address",
-					"name": "to",
-					"type": "address"
-				},
-				{
-					"internalType": "uint256",
-					"name": "deadline",
-					"type": "uint256"
-				}
-			],
-			"name": "swapExactETHForTokens",
-			"outputs": [
-				{
-					"internalType": "uint256[]",
-					"name": "amounts",
-					"type": "uint256[]"
-				}
-			],
-			"stateMutability": "payable",
-			"type": "function"
-		},
-		{
-			"inputs": [
-				{
-					"internalType": "address",
-					"name": "amm_address",
-					"type": "address"
-				},
-				{
-					"internalType": "uint256",
-					"name": "amountIn",
-					"type": "uint256"
-				},
-				{
-					"internalType": "uint256",
-					"name": "amountOutMin",
-					"type": "uint256"
-				},
-				{
-					"internalType": "address[]",
-					"name": "path",
-					"type": "address[]"
-				},
-				{
-					"internalType": "address",
-					"name": "to",
-					"type": "address"
-				},
-				{
-					"internalType": "uint256",
-					"name": "deadline",
-					"type": "uint256"
-				}
-			],
-			"name": "swapExactTokensForETH",
-			"outputs": [
-				{
-					"internalType": "uint256[]",
-					"name": "amounts",
-					"type": "uint256[]"
-				}
-			],
-			"stateMutability": "nonpayable",
-			"type": "function"
-		},
-		{
-			"inputs": [
-				{
-					"internalType": "address",
-					"name": "amm_address",
-					"type": "address"
-				},
-				{
-					"internalType": "uint256",
-					"name": "amountIn",
-					"type": "uint256"
-				},
-				{
-					"internalType": "uint256",
-					"name": "amountOutMin",
-					"type": "uint256"
-				},
-				{
-					"internalType": "address[]",
-					"name": "path",
-					"type": "address[]"
-				},
-				{
-					"internalType": "address",
-					"name": "to",
-					"type": "address"
-				},
-				{
-					"internalType": "uint256",
-					"name": "deadline",
-					"type": "uint256"
-				}
-			],
-			"name": "swapExactTokensForTokens",
-			"outputs": [
-				{
-					"internalType": "uint256[]",
-					"name": "amounts",
-					"type": "uint256[]"
-				}
-			],
-			"stateMutability": "payable",
 			"type": "function"
 		}
 	]

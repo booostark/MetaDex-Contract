@@ -51,24 +51,17 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": true,
-			"runs": 400
+			"enabled": false,
+			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
-		"I_AMM_Adaptor.sol": {
-			"keccak256": "0x5d842a481f7a189e0b6c35428966acaac5eb2d422322b3d269b54f1d8816ad6a",
-			"urls": [
-				"bzz-raw://77a081e0fbbf1aa1ad9e9eab75feaa6442e3474688dfb11330823b20d53c144c",
-				"dweb:/ipfs/QmeKxfq6HEQEbSQfYGDNXmVHrJzUchhJbq4iXqskytYdZ8"
-			]
-		},
 		"Reunite_AMM.sol": {
-			"keccak256": "0x5d8bc169af47d4bb21b890554bcc34d2e13621b8eba011734afe7663f8935be2",
+			"keccak256": "0xd33b4321c594558e9e1a26c117da1f25f757ce896159b7d4bcc2a737fd1d1cbb",
 			"urls": [
-				"bzz-raw://171eefb44412b3109acf5ab2f0459b4560ff34fe50ca40d06e64d5cadec0f761",
-				"dweb:/ipfs/QmQcoGujMtwxNe4B1enxyvRLQYyMxES3Wr2Qms4SN8j9K1"
+				"bzz-raw://42d9a0ffc4368d609d0202a477cb8d849e2eef01767fd6cbbab53a9c22c5f23a",
+				"dweb:/ipfs/QmRuJAVqkpp8sx3BiQWbEHcEz3M1j5kmMbCKQSaXVwZKeM"
 			]
 		},
 		"openzeppelin/contracts/access/Ownable.sol": {
